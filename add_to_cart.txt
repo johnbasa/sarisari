@@ -1,0 +1,11 @@
+<?php
+
+session_start();
+
+$itemID = $_GET['id'];
+if(isset($_SESSION["cart_$itemID"])) $_SESSION["cart_$itemID"]++;
+else $_SESSION["cart_$itemID"]=1;
+
+header("location:".$_SERVER['HTTP_REFERER']);
+
+?>

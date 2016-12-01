@@ -1,0 +1,22 @@
+<?php
+
+session_start();
+include('connectDB.php');
+
+foreach($_SESSION as $key => $value){
+	if(substr($key,0,4)=='cart'){
+		$itemID[] = substr($key,5);
+		$itemQuantity[] = $value;
+	}
+}
+
+for($x=0;$x<count($itemID);$x++){
+	$id = $itemID[$x];
+	$sql = "SELECT * FROM items WHERE id='$id'";
+	$result = mysqli_query($conn,$sql);
+	while($row = mysqli_fetch_assoc($result)){
+		echo "product name: ".$row['name']." Quantity: ".$itemQuantity[$x]."<br>";
+	}
+}
+
+?>
